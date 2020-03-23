@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/search/search",
+    "pages/home/home",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/musicList/musicList"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#bb2c08",
+    "navigationBarTitleText": "网易云音乐",
+    "navigationBarTextStyle": "white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

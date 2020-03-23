@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "my-sidebar":"../../component/sidebar/sidebar",
+    "mp-icons": "../../weui-miniprogram/icon/icon",
+    "mp-searchbar":"../../weui-miniprogram/searchbar/searchbar"
+  }
+}

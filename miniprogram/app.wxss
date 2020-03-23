@@ -1,0 +1,11 @@
+/**app.wxss**/
+@import './weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+.clear::after{
+  display: block;
+  content: "";
+  clear: both;
+}
+page{
+  min-height: 100%;
+}
+

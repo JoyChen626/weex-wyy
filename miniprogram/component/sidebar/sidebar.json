@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "mp-icons":"../../weui-miniprogram/icon/icon"
+  }
+}

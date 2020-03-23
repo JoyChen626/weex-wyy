@@ -1,0 +1,82 @@
+<!-- miniprogram/pages/home/home.wxml -->
+<view class="page">
+  <view class="search-part">
+    <view class="search-box">
+      <mp-icons class="icon-mike" type="outline" icon="mike"></mp-icons>
+      <mp-searchbar class="search" ext-class="true" placeholder="" value="无中生有"></mp-searchbar>
+      <mp-icons class="icon-mosaic" type="outline" icon="mosaic" bind:tap="showSideBar"></mp-icons>
+    </view>
+  </view>
+  <view class="swiper-part">
+    <swiper indicator-dots="true" indicator-color="rgba(255,255,255,.5)" autoplay="true" indicator-active-color="#ff5252">
+      <block wx:for="{{background}}" wx:key="*this">
+        <swiper-item>
+          <view class="swiper-item {{item}}">{{item}}</view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="type-part">
+    <view class="flex-item" wx:for="{{typeArr}}" wx:for-item="item">
+      <view class="img-box">
+        <image mode="scaleToFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+      </view>
+      <text class="title-text">{{item.title}}</text>
+    </view>
+  </view>
+  <view class="content-part">
+    <view class="content-title">
+      <text class="title1">推荐歌单</text>
+      <view class="title2-box">
+        <text class="title2">为您精心挑选</text>
+        <button class="button" plain size="mini" type="default">查看更多</button>
+      </view>
+    </view>
+    <view class="content">
+      <scroll-view class="scroll-view" scroll-x="true" bindscroll="scroll" style="width: 100%">
+        <view class="scroll-view-item_menu demo-text-{{index}}" wx:for="{{memusArr}}" wx:for-item="item" wx:key="index">
+          <view class="img-box">
+            <image mode="scaleToFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+          </view>
+          <text class="title">{{item.title}}</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="content-part">
+    <view class="content-title">
+      <text class="title1">歌曲推荐</text>
+      <view class="title2-box">
+        <text class="title2">根据无人之岛推荐</text>
+        <button class="button" plain size="mini" type="default">
+          <mp-icons class="button-icon" plain size="{{16}}" type="field" icon="play"></mp-icons>
+          播放全部
+        </button>
+      </view>
+    </view>
+    <view class="content">
+      <scroll-view class="scroll-view" scroll-x="true" bindscroll="scroll" style="width: 100%">
+        <view class="scroll-view-item_music clear">
+          <view class="items" wx:for="{{musicArr}}" wx:for-item="item" wx:key="index">
+            <view class="img-box">
+              <image mode="scaleToFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+            </view>
+            <view class="detail">
+              <view class="left">
+                <view>
+                  <text class="title">{{item.title}}</text>
+                  <text class="name">- {{item.name}}</text>
+                </view>
+                <text class="tip">{{item.tip}}</text>
+              </view>
+              <view class="right">
+                <mp-icons class="icon-play2" size="{{30}}" type="field" icon="play2"></mp-icons>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <my-sidebar class="box" sidebarFlag="{{sidebarFlag}}" bind:closeSidebar="hideSideBar" sidebarAnimation="{{sidebarAnimation}}"></my-sidebar>
+</view>

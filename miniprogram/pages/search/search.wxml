@@ -1,0 +1,58 @@
+<!-- miniprogram/pages/search/search.wxml -->
+<view class="page">
+    <view class="search-part">
+        <mp-searchbar class="search" ext-class="true" placeholder="无中生有" value="{{searchValue}}" bind:input="getSearchValue" bindcancel="searchCancel" bindclear="clearValue"></mp-searchbar>
+    </view>
+    <view hidden="{{searchValue!=''}}">
+        <view class="history-part">
+            <view>
+                <text class="title">历史搜索</text>
+            </view>
+            <view class="btn-list-box clear" wx:if="{{historyList.length>0}}">
+                <button wx:for="{{historyList}}" wx:for-item="item" wx:key="index" type="default" size="mini" plain>
+                    <text>{{item.text}}</text>
+                    <icon class="delete-icon" hidden="{{delete}}" color="#999999" type="cancel" size="20" catch:tap="deleteHistory" data-id="{{item.id}}" />
+                </button>
+            </view>
+            <view class="clear-box" wx:if="{{historyList.length>0}}">
+                <button bind:tap="todelete" type="warn" size="mini" class="{{delete?'delete':'finish'}}">
+                    {{delete?'删除搜索记录':'完成'}}
+                </button>
+            </view>
+        </view>
+        <view class="host-part">
+            <view>
+                <text class="title">热门搜索</text>
+            </view>
+            <view class="btn-list-box clear">
+                <button wx:for="{{hostList}}" wx:for-item="item" wx:key="index" type="default" size="mini" plain>
+                    <text>{{item.text}}</text>
+                </button>
+            </view>
+        </view>
+    </view>
+    <view class="matching-part">
+        <view class="type-part clear" wx:if="{{datas.length>0}}">
+            <view class="type-item {{activeType == item.id?'active':''}}" wx:for="{{typeList}}" wx:for-item="item" wx:key="index" bind:tap="changeType" data-id="{{item.id}}">
+                <text>{{item.text}}</text>
+            </view>
+        </view>
+        <scroll-view wx:if="{{datas.length>0}}" scroll-y="true" style="height:{{windowHeight - 42 - 26}}px" hidden="{{searchValue==''}}">
+            <view class="matching-item" wx:for="{{datas}}" wx:for-item="item" wx:key="index" bind:tap="search" data-search="{{item}}">
+                <view class="img-box">
+                     <image mode="scaleToFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+                </view>
+                <text>{{item}}</text>
+            </view>
+            <view class="nomore-item" hidden="{{datas.length==0}}">
+                <text>到底了~</text>
+            </view>
+        </scroll-view>
+        <mp-msg wx:if="{{datas.length==0 && searchValue !== ''}}" type="outline" icon="display" title="结果为空">
+            <view slot="desc">
+                没有找到与{{searchValue}}相关的内容
+                <!-- <navigator url="" class="weui-msg__link">文字链接</navigator> -->
+            </view>
+        </mp-msg>
+    </view>
+</view>

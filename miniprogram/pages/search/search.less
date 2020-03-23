@@ -1,0 +1,124 @@
+.page {
+    width: 100%;
+    height: 100%;
+    .search-part {
+        .weui-search-bar__input,
+        .weui-search-bar__text {
+            height: 26px;
+            line-height: 26px;
+            font-size: 28rpx;
+        }
+        .weui-icon-search {
+            font-size: 14px;
+        }
+        .weui-icon-search_in-box {
+            margin-top: -6px;
+        }
+        .weui-search-bar__cancel-btn {
+            height: 26rpx;
+            line-height: 26rpx;
+            font-size: 28rpx;
+        }
+    }
+    .history-part,
+    .host-part {
+        padding: 20rpx;
+        .title {
+            font-size: 32rpx;
+            height: 60rpx;
+            line-height: 60rpx;
+            color: #999999;
+        }
+        .btn-list-box {
+            button {
+                float: left;
+                height: 55rpx;
+                line-height: 55rpx;
+                margin: 10rpx 20rpx;
+                border-radius: 30rpx;
+                color: #666666;
+                border: 1px solid #999999;
+                font-size: 0;
+                padding: 0 20rpx;
+                text {
+                    font-size: 24rpx;
+                    height: 53rpx;
+                    line-height: 53rpx;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                .delete-icon {
+                    height: 20px;
+                    line-height: 20px;
+                    margin-left: 10rpx;
+                }
+            }
+        }
+        .clear-box {
+            font-size: 0;
+            text-align: center;
+            margin-top: 20rpx;
+            button {
+                height: 55rpx;
+                line-height: 55rpx;
+                font-size: 24rpx;
+                color: #ffffff;
+            }
+            .delete {
+                background: #E64340;
+            }
+            .finish {
+                background: #1AAD19;
+            }
+        }
+    }
+    .matching-part {
+        .type-part {
+            width: 100%;
+            background: #EDEDED;
+            .type-item {
+                height: 24px;
+                line-height: 24px;
+                text-align: center;
+                font-size: 24rpx;
+                font-weight: bold;
+                color: #333333;
+                float: left;
+                width: 14%;
+                margin: 0 3%;
+                border-bottom: 2px solid #EDEDED;
+            }
+            .active {
+                border-bottom: 2px solid #E64340;
+                color: #E64340;
+            }
+        }
+        .matching-item {
+            padding: 20rpx 30rpx;
+            height: 80rpx;
+            line-height: 80rpx;
+            font-size: 28rpx;
+            color: #666666;
+            border-bottom: 1px solid #eeeeee;
+            display: flex;
+            .img-box {
+                width: 80rpx;
+                height: 80rpx;
+                border-radius: 4rpx;
+                overflow: hidden;
+                margin-right: 30rpx;
+                image {
+                    width: 80rpx;
+                    height: 80rpx;
+                }
+            }
+        }
+        .nomore-item {
+            height: 80rpx;
+            line-height: 80rpx;
+            font-size: 24rpx;
+            color: #666666;
+            text-align: center;
+        }
+    }
+}

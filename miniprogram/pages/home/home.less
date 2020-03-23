@@ -1,0 +1,238 @@
+.page {
+    background: #ffffff;
+    .search-part {
+        .search-box {
+            padding: 20rpx 20rpx;
+            display: flex;
+            align-items: center;
+            .icon-mike {
+                float: left;
+                .weui-icon {
+                    vertical-align: middle;
+                }
+            }
+            .search {
+                float: left;
+                flex: 1;
+                .weui-search-bar__form {
+                    border-radius: 25rpx;
+                    overflow: hidden;
+                    background: #eeeeee;
+                    .weui-search-bar__label {
+                        background: #eeeeee;
+                    }
+                    .weui-search-bar__label,
+                    .weui-search-bar__input {
+                        height: 60rpx;
+                        line-height: 60rpx;
+                        font-size: 28rpx;
+                        &::placeholder {
+                            height: 60rpx;
+                            line-height: 60rpx;
+                            font-size: 28rpx;
+                        }
+                    }
+                    .weui-icon-search_in-box {
+                        margin-top: -6px;
+                    }
+                    .weui-icon-search {
+                        height: 60rpx;
+                        line-height: 60rpx;
+                        margin-top: 0;
+                    }
+                    .weui-search-bar__text {
+                        height: 60rpx;
+                        line-height: 60rpx;
+                        font-size: 28rpx;
+                    }
+                }
+                .weui-search-bar__cancel-btn {
+                    height: 60rpx;
+                    line-height: 60rpx;
+                    font-size: 28rpx;
+                }
+                .weui-search-bar {
+                    background: #ffffff;
+                }
+            }
+            .icon-mosaic {
+                float: right;
+                .weui-icon {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+    .swiper-part {
+        margin: 0 30rpx;
+        border-radius: 32rpx;
+        height: 300rpx;
+        overflow: hidden;
+        background: #999999;
+        swiper {
+            height: 300rpx;
+        }
+    }
+    .type-part {
+        display: flex;
+        margin: 30rpx;
+        .flex-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            .img-box {
+                width: 100rpx;
+                height: 100rpx;
+                border-radius: 50%;
+                margin: 0 auto;
+                overflow: hidden;
+                image {
+                    width: 100rpx;
+                    height: 100rpx;
+                }
+            }
+            .title-text {
+                font-size: 28rpx;
+                height: 50rpx;
+                line-height: 50rpx;
+            }
+        }
+    }
+    .content-part {
+        padding: 20rpx 30rpx;
+        .content-title {
+            .title1 {
+                height: 50rpx;
+                line-height: 50rpx;
+                font-size: 28rpx;
+                color: #999999;
+            }
+            .title2-box {
+                display: flex;
+                .title2 {
+                    flex: 1;
+                    line-height: 60rpx;
+                    height: 60rpx;
+                    font-size: 40rpx;
+                    font-weight: bolder;
+                }
+                .button {
+                    padding: 0 20rpx;
+                    height: 50rpx;
+                    line-height: 50rpx;
+                    font-size: 24rpx;
+                    border-radius: 25rpx;
+                    color: #666666;
+                    border-color: #666666;
+                    .button-icon {
+                        .weui-icon {
+                            margin-bottom: 6rpx;
+                        }
+                    }
+                }
+            }
+        }
+        .content {
+            .scroll-view {
+                white-space: nowrap;
+                .scroll-view-item_menu {
+                    display: inline-block;
+                    width: 180rpx;
+                    margin-right: 40rpx;
+                    .img-box {
+                        width: 180rpx;
+                        height: 180rpx;
+                        border-radius: 8rpx;
+                        overflow: hidden;
+                        margin-top: 30rpx;
+                        margin-bottom: 10rpx;
+                        border: 2rpx solid #999999;
+                        background: #eeeeee;
+                        image {
+                            width: 180rpx;
+                            height: 180rpx;
+                        }
+                    }
+                    .title {
+                        font-size: 28rpx;
+                        line-height: 40rpx;
+                        white-space: pre-wrap;
+                        height: 80rpx;
+                        overflow-wrap: break-word;
+                        display: -webkit-box;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        word-break: break-all;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        text-align: center;
+                    }
+                }
+                .scroll-view-item_music {
+                    width: 1860rpx;
+                    .items {
+                        float: left;
+                        width: 540rpx;
+                        padding: 30rpx 20rpx;
+                        display: flex;
+                        align-items: center;
+                        margin-right: 40rpx;
+                        overflow: hidden;
+                        .img-box {
+                            width: 100rpx;
+                            height: 100rpx;
+                            background: #eeeeee;
+                            border: 2rpx solid #999999;
+                            border-radius: 8rpx;
+                            margin-right: 20rpx;
+                            overflow: hidden;
+                            image {
+                                width: 100rpx;
+                                height: 100rpx;
+                            }
+                        }
+                        .detail {
+                            flex: 1;
+                            display: flex;
+                            align-items: center;
+                            .left{
+                                flex: 1;
+                                .title{
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                    height: 40rpx;
+                                    line-height: 40rpx;
+                                    font-size: 32rpx;
+                                    font-weight: bold;
+                                }
+                                .name{
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                    height: 40rpx;
+                                    line-height: 40rpx;
+                                    font-size: 28rpx;
+                                    color: #999999;
+                                }
+                                .tip{
+                                    padding: 0 8rpx;
+                                    font-size: 24rpx;
+                                    height: 32rpx;
+                                    line-height: 32rpx;
+                                    color: #ff5222;
+                                    background: #999999;
+                                    border-radius: 8rpx;
+                                }
+                            }
+                            .right{
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

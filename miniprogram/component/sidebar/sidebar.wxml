@@ -1,0 +1,56 @@
+<!-- component/sidebar/sidebar.wxml -->
+<view class="component" animation="{{sidebarAnimation}}">
+    <view class="box">
+        <view class="model" bind:tap="closeSideBar"></view>
+        <view class="content">
+            <view class="top clear">
+                <view class="top-left">
+                    <view class="img-box">
+                        <image mode="scaleToFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+                    </view>
+                    <view>
+                        <text class="username">我的名字</text>
+                    </view>
+                </view>
+                <view class="top-right">
+                    <button class="button" plain size="mini" type="primary">
+                        <!-- <mp-icons class="button-icon" size="{{16}}" type="field" icon="play"></mp-icons> -->
+                        签到
+                    </button>
+                </view>
+            </view>
+            <view class="nav">
+                <view class="nav-item" wx:for="{{navArr}}" wx:for-item="item" wx:key="index">
+                    <view class="img-box">
+                        <image mode="scaleToFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+                    </view>
+                    <view>
+                        <text class="title">{{item.title}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="cells">
+                <view class="cell-item" wx:for="{{cellArr}}" wx:for-item="item" wx:key="index">
+                    <!-- <mp-icons class="button-icon" size="{{16}}" type="field" icon="play"></mp-icons> -->
+                    <text class="title">{{item.title}}</text>
+                </view>
+            </view>
+            <view class="other">
+                <view class="other-item">
+                    <text class="title">定时停止播放</text>
+                </view>
+            </view>
+            <view class="buttom clear">
+                <view class="btn-item">
+                    <text>夜间模式</text>
+                </view>
+                <view class="btn-item">
+                    <text>设置</text>
+                </view>
+                <view class="btn-item">
+                    <text>我的</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
