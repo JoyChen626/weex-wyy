@@ -1,0 +1,141 @@
+.page .top-part {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 40rpx 40rpx 20rpx 40rpx;
+}
+.page .top-part .msg-box {
+  display: flex;
+  align-items: center;
+  padding-bottom: 50rpx;
+}
+.page .top-part .msg-box .album-img {
+  width: 300rpx;
+  height: 300rpx;
+  overflow: hidden;
+  position: relative;
+  margin-right: 30rpx;
+}
+.page .top-part .msg-box .album-img image {
+  width: 100%;
+  height: 100%;
+}
+.page .top-part .msg-box .album-img .listen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.page .top-part .msg-box .album-img .listen text {
+  font-size: 24rpx;
+  color: #ffffff;
+}
+.page .top-part .msg-box .info .title {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 32rpx;
+  font-weight: bolder;
+  color: #ffffff;
+}
+.page .top-part .msg-box .info .other {
+  display: flex;
+}
+.page .top-part .msg-box .info .other .photo-img {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 40rpx;
+}
+.page .top-part .msg-box .info .other .photo-img image {
+  width: 100%;
+  height: 100%;
+}
+.page .top-part .msg-box .info .other .name {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  color: #ffffff;
+}
+.page .top-part .type-btn {
+  display: flex;
+}
+.page .top-part .type-btn .type-item {
+  flex: 1;
+  text-align: center;
+}
+.page .top-part .type-btn .type-item .icon-img {
+  font-size: 0;
+}
+.page .top-part .type-btn .type-item .icon-img .wyy-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+.page .top-part .type-btn .type-item .num-box {
+  font-size: 0;
+}
+.page .top-part .type-btn .type-item .num-box .type-num {
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  color: #ffffff;
+}
+.page .music-part {
+  padding: 0 20rpx;
+}
+.page .music-part .title-box {
+  border-bottom: 1px solid #eeeeee;
+}
+.page .music-part .title-box .wyy-icon {
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+.page .music-part .title-box .title {
+  display: inline-block;
+  vertical-align: middle;
+  height: 40px;
+  line-height: 40px;
+  font-size: 28rpx;
+  font-weight: bolder;
+}
+.page .music-part .music-list .music-item {
+  padding: 10rpx 0;
+  border-bottom: 1px solid #eeeeee;
+}
+.page .music-part .music-list .music-item .left {
+  float: left;
+  margin-right: 20rpx;
+}
+.page .music-part .music-list .music-item .left .index {
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #999999;
+  font-size: 28rpx;
+  font-weight: bolder;
+}
+.page .music-part .music-list .music-item .left .wyy-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 20rpx;
+}
+.page .music-part .music-list .music-item .left .song-name {
+  display: block;
+  line-height: 30rpx;
+  height: 30rpx;
+  font-size: 28rpx;
+  margin-top: 10rpx;
+}
+.page .music-part .music-list .music-item .left .other-name {
+  display: block;
+  line-height: 30rpx;
+  height: 30rpx;
+  font-size: 24rpx;
+  margin-bottom: 10rpx;
+  color: #999999;
+}
+.page .music-part .music-list .music-item .right {
+  float: right;
+}
+.page .music-part .music-list .music-item .right .wyy-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 20rpx;
+}

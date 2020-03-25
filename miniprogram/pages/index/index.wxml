@@ -1,13 +1,79 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<!-- index.wxml -->
+<view class="page">
+  <view class="box" wx:if="{{canLogin}}">
+    <view class="logo-box">
+      <view class="img-box">
+        <image mode="scaleToFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+      </view>
+    </view>
+    <view class="input-box">
+      <view wx:if="{{pageType == 'login'}}">
+        <view class="item">
+          <text>账号 :</text>
+          <input value="{{username}}" data-type="username" bindinput="getInputValue"></input>
+        </view>
+        <view class="item">
+          <text>密码 :</text>
+          <input value="{{password}}" data-type="password" bindinput="getInputValue"></input>
+        </view>
+      </view>
+      <view wx:if="{{pageType == 'register'}}">
+        <view class="item">
+          <text>手机号 :</text>
+          <input value="{{userphone}}" data-type="userphone" bindinput="getInputValue" class="weui-input" placeholder="请输入手机号码" />
+        </view>
+        <view class="item">
+          <text>验证码 :</text>
+          <input value="{{idcode}}" data-type="idcode" bindinput="getInputValue" class="weui-input input-idcode" placeholder="" />
+          <button type="{{codeTime<60?'default':'primary'}}" size="mini" bind:tap="getIdcode">{{codeTime<60?(codeTime+'s后重新发送'):'获取验证码'}}</button>
+        </view>
+        <view class="item">
+          <text>密码 :</text>
+          <input value="{{password}}" data-type="password" bindinput="getInputValue"></input>
+        </view>
+        <view class="item">
+          <text>确认密码 :</text>
+          <input value="{{passwords}}" data-type="passwords" bindinput="getInputValue"></input>
+        </view>
+      </view>
+    </view>
+    <view class="btn-box">
+      <button type="primary" size="default" bind:tap="enterHome">{{pageType == 'login'?'登录':'注册'}}</button>
+    </view>
+    <view class="other-box clear">
+      <text class="left">{{pageType == 'login'?'未':'已'}}有账号</text>
+      <text class="right" bind:tap="changePageType">去{{pageType == 'login'?'注册':'登录'}}</text>
+    </view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="box box2" wx:if="{{!canLogin}}">
+    <view class="logo-box">
+      <view class="img-box">
+        <image mode="scaleToFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+      </view>
+    </view>
+    <view class="title">
+      <text>xxx音乐</text>
+    </view>
+    <view class="subtitle">
+      <text>聆听世界，感受美好。</text>
+    </view>
+    <view class="btn-box">
+      <button type="primary" size="default" bind:tap="enter">进入</button>
+    </view>
+  </view>
+  <view class="pop" animation="{{popAnimation}}">
+    <view class="pop-box">
+      <view class="black"></view>
+      <view class="authorize-pop">
+        <view class="pop-title"><text>用户授权</text></view>
+        <view class="pop-content"><text>用户授权,同意将获取用户信息（性别、昵称、头像、地区等）</text></view>
+        <view class="pop-btn clear">
+          <view class="left">
+            <text>取消</text>
+          </view>
+          <button class="right" type="default" size="mini" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">同意</button>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

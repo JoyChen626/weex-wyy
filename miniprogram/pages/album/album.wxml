@@ -1,0 +1,58 @@
+<!-- miniprogram/pages/album/album.wxml -->
+<view class="page">
+    <view class="top-part">
+        <view class="msg-box">
+            <view class="album-img">
+                <image mode="scaleToFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+                <view class="listen">
+                    <text class="listen-icon">$</text>
+                    <text class="listen-num">1234</text>
+                </view>
+            </view>
+            <view class="info">
+                <view>
+                    <text class="title">title</text>
+                </view>
+                <view class="other">
+                    <view class="photo-img">
+                        <image mode="scaleToFill" src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"></image>
+                    </view>
+                    <view class="name-box">
+                        <text class="name">name ></text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="type-btn">
+            <view class="type-item" wx:for="{{typeList}}" wx:for-item="item" wx:key="index">
+                <view class="icon-img">
+                    <text class="wyy-icon {{item.type}}"></text>
+                </view>
+                <view class="num-box">
+                    <text class="type-num">{{item.num}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="music-part">
+        <view class="title-box">
+            <text class="wyy-icon wyy-icon-stop"></text>
+            <text class="title">播放全部</text>
+        </view>
+        <view class="music-list">
+            <view class="music-item clear" wx:for="{{musicList}}" wx:for-item="item" wx:key="index">
+                <view class="left">
+                    <text class="index" wx:if="{{item.play == 0}}">{{index<10?'0'+(index+1):(index+1)}}</text>
+                    <text class="wyy-icon wyy-icon-voice" wx:if="{{item.play == 1}}"></text>
+                </view>
+                <view class="left">
+                    <text class="song-name">{{item.song}}</text>
+                    <text class="other-name">{{item.other}}-{{item.name}}</text>
+                </view>
+                <view class="right">
+                    <text class="wyy-icon wyy-icon-MV" wx:if="{{item.video==1}}"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

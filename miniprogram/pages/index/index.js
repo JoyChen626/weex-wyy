@@ -2,51 +2,133 @@
 var app = getApp();
 Page({
     data: {
-        motto: 'Hello World',
-        userInfo: {},
+        pageType: 'login', //login || register
+        userInfo: null,
+        popFlag: false,
         hasUserInfo: false,
-        canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    },
-    bindViewTap: function () {
-        wx.navigateTo({
-            url: '../logs/logs',
-        });
+        canLogin: false,
+        popAnimation: null,
+        username: '',
+        password: '',
+        passwords: '',
+        userphone: '',
+        idcode: '',
+        codeTime: 60,
+        myTimer:null
     },
     onLoad: function () {
-        var _this = this;
-        if (app.globalData.userInfo) {
+        if (wx.getStorageSync('userInfo')) {
+            this.setData({ userInfo: JSON.parse(wx.getStorageSync('userInfo')) })
+        }
+        if (this.data.userInfo !== null) {
+            console.log(this.data.userInfo)
             this.setData({
-                userInfo: app.globalData.userInfo,
                 hasUserInfo: true,
             });
         }
-        else if (this.data.canIUse) {
-            app.userInfoReadyCallback = function (res) {
-                _this.setData({
-                    userInfo: res.userInfo,
-                    hasUserInfo: true,
-                });
-            };
-        }
-        else {
-            wx.getUserInfo({
-                success: function (res) {
-                    app.globalData.userInfo = res.userInfo;
-                    _this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true,
-                    });
-                },
-            });
+    },
+    enter() {
+        if (this.data.hasUserInfo) {
+            this.setData({ canLogin: true })
+        } else {
+            var animation = wx.createAnimation({
+                duration:200,
+                timingFunction: 'linear'
+              })
+            animation.opacity(1).width('100%').height('100%').step();
+            this.setData({ popFlag: true,popAnimation:animation.export() })
         }
     },
-    getUserInfo: function (e) {
-        console.log(e);
-        app.globalData.userInfo = e.detail.userInfo;
-        this.setData({
-            userInfo: e.detail.userInfo,
-            hasUserInfo: true,
-        });
+    onGetUserInfo(e) {
+        var animation = wx.createAnimation({
+            duration:200,
+            timingFunction: 'linear'
+          })
+        animation.opacity(0).width('0%').height('0%').step();
+        this.setData({ userInfo: e.detail.userInfo, hasUserInfo: true, canLogin: true, popFlag: false,popAnimation:animation.export() });
+        wx.setStorageSync('userInfo', JSON.stringify(this.data.userInfo));
+        wx.showToast({ title: '授权成功' })
     },
+    changePageType() {
+        this.setData({ pageType: this.data.pageType === 'login' ? 'register' : 'login' })
+    },
+    getInputValue(event) {
+        console.log(event)
+        var value = event.detail.value;
+        switch (event.currentTarget.dataset.type) {
+            case 'username':
+                this.setData({ username: value })
+                break;
+            case 'password':
+                this.setData({ password: value })
+                break;
+            case 'passwords':
+                this.setData({ passwords: value })
+                break;
+            case 'userphone':
+                this.setData({ userphone: value })
+                break;
+            case 'idcode':
+                this.setData({ idcode: value })
+                break;
+            default:
+                return null    
+        }
+    },
+    getIdcode(){
+        var _this = this;
+        if(_this.data.myTimer){
+            return false;
+        }
+        _this.data.myTimer = setInterval(() => {
+            _this.setData({codeTime:_this.data.codeTime - 1})
+            console.log(_this.data.codeTime)
+            if(_this.data.codeTime == 0){
+                clearInterval(myTimer);
+                _this.setData({codeTime:60})
+            }
+        }, 1000);
+    },
+    enterHome() {
+        switch (this.data.pageType) {
+            case 'login':
+                if (this.data.username == '') {
+                    wx.showToast({ title: '请输入账号', icon: 'none' });
+                    return false;
+                }
+                if (this.data.password == '') {
+                    wx.showToast({ title: '请输入密码', icon: 'none' });
+                    return false;
+                }
+                wx.setStorageSync('loginFlag','success')
+                wx.redirectTo({ url: '../home/home'})
+                break;
+            case 'register':
+                if (this.data.userphone == '') {
+                    wx.showToast({ title: '请输入手机号', icon: 'none' });
+                    return false;
+                }
+                if (this.data.idcode == '') {
+                    wx.showToast({ title: '请输入验证码', icon: 'none' });
+                    return false;
+                }
+                if (this.data.password == '') {
+                    wx.showToast({ title: '请输入密码', icon: 'none' });
+                    return false;
+                }
+                if (this.data.passwords == '') {
+                    wx.showToast({ title: '请确认密码', icon: 'none' });
+                    return false;
+                }
+                if (this.data.password !== this.data.passwords) {
+                    wx.showToast({ title: '两次密码不一致', icon: 'none' });
+                    return false;
+                }
+                wx.setStorageSync('loginFlag','success')
+                wx.redirectTo({ url: '../home/home'})
+                break;
+            default:
+                return null
+        }
+    }
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBRUEsSUFBTSxHQUFHLEdBQUcsTUFBTSxFQUFjLENBQUE7QUFFaEMsSUFBSSxDQUFDO0lBQ0gsSUFBSSxFQUFFO1FBQ0osS0FBSyxFQUFFLGFBQWE7UUFDcEIsUUFBUSxFQUFFLEVBQUU7UUFDWixXQUFXLEVBQUUsS0FBSztRQUNsQixPQUFPLEVBQUUsRUFBRSxDQUFDLE9BQU8sQ0FBQyw4QkFBOEIsQ0FBQztLQUNwRDtJQUVELFdBQVc7UUFDVCxFQUFFLENBQUMsVUFBVSxDQUFDO1lBQ1osR0FBRyxFQUFFLGNBQWM7U0FDcEIsQ0FBQyxDQUFBO0lBQ0osQ0FBQztJQUNELE1BQU07UUFBTixpQkEyQkM7UUExQkMsSUFBSSxHQUFHLENBQUMsVUFBVSxDQUFDLFFBQVEsRUFBRTtZQUMzQixJQUFJLENBQUMsT0FBTyxDQUFDO2dCQUNYLFFBQVEsRUFBRSxHQUFHLENBQUMsVUFBVSxDQUFDLFFBQVE7Z0JBQ2pDLFdBQVcsRUFBRSxJQUFJO2FBQ2xCLENBQUMsQ0FBQTtTQUNIO2FBQU0sSUFBSSxJQUFJLENBQUMsSUFBSSxDQUFDLE9BQU8sRUFBRTtZQUc1QixHQUFHLENBQUMscUJBQXFCLEdBQUcsVUFBQSxHQUFHO2dCQUM3QixLQUFJLENBQUMsT0FBTyxDQUFDO29CQUNYLFFBQVEsRUFBRSxHQUFHLENBQUMsUUFBUTtvQkFDdEIsV0FBVyxFQUFFLElBQUk7aUJBQ2xCLENBQUMsQ0FBQTtZQUNKLENBQUMsQ0FBQTtTQUNGO2FBQU07WUFFTCxFQUFFLENBQUMsV0FBVyxDQUFDO2dCQUNiLE9BQU8sRUFBRSxVQUFBLEdBQUc7b0JBQ1YsR0FBRyxDQUFDLFVBQVUsQ0FBQyxRQUFRLEdBQUcsR0FBRyxDQUFDLFFBQVEsQ0FBQTtvQkFDdEMsS0FBSSxDQUFDLE9BQU8sQ0FBQzt3QkFDWCxRQUFRLEVBQUUsR0FBRyxDQUFDLFFBQVE7d0JBQ3RCLFdBQVcsRUFBRSxJQUFJO3FCQUNsQixDQUFDLENBQUE7Z0JBQ0osQ0FBQzthQUNGLENBQUMsQ0FBQTtTQUNIO0lBQ0gsQ0FBQztJQUNELFdBQVcsWUFBQyxDQUFNO1FBQ2hCLE9BQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUE7UUFDZCxHQUFHLENBQUMsVUFBVSxDQUFDLFFBQVEsR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLFFBQVEsQ0FBQTtRQUMzQyxJQUFJLENBQUMsT0FBTyxDQUFDO1lBQ1gsUUFBUSxFQUFFLENBQUMsQ0FBQyxNQUFNLENBQUMsUUFBUTtZQUMzQixXQUFXLEVBQUUsSUFBSTtTQUNsQixDQUFDLENBQUE7SUFDSixDQUFDO0NBQ0YsQ0FBQyxDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiLy8gaW5kZXgudHNcbi8vIOiOt+WPluW6lOeUqOWunuS+i1xuY29uc3QgYXBwID0gZ2V0QXBwPElBcHBPcHRpb24+KClcblxuUGFnZSh7XG4gIGRhdGE6IHtcbiAgICBtb3R0bzogJ0hlbGxvIFdvcmxkJyxcbiAgICB1c2VySW5mbzoge30sXG4gICAgaGFzVXNlckluZm86IGZhbHNlLFxuICAgIGNhbklVc2U6IHd4LmNhbklVc2UoJ2J1dHRvbi5vcGVuLXR5cGUuZ2V0VXNlckluZm8nKSxcbiAgfSxcbiAgLy8g5LqL5Lu25aSE55CG5Ye95pWwXG4gIGJpbmRWaWV3VGFwKCkge1xuICAgIHd4Lm5hdmlnYXRlVG8oe1xuICAgICAgdXJsOiAnLi4vbG9ncy9sb2dzJyxcbiAgICB9KVxuICB9LFxuICBvbkxvYWQoKSB7XG4gICAgaWYgKGFwcC5nbG9iYWxEYXRhLnVzZXJJbmZvKSB7XG4gICAgICB0aGlzLnNldERhdGEoe1xuICAgICAgICB1c2VySW5mbzogYXBwLmdsb2JhbERhdGEudXNlckluZm8sXG4gICAgICAgIGhhc1VzZXJJbmZvOiB0cnVlLFxuICAgICAgfSlcbiAgICB9IGVsc2UgaWYgKHRoaXMuZGF0YS5jYW5JVXNlKSB7XG4gICAgICAvLyDnlLHkuo4gZ2V0VXNlckluZm8g5piv572R57uc6K+35rGC77yM5Y+v6IO95Lya5ZyoIFBhZ2Uub25Mb2FkIOS5i+WQjuaJjei/lOWbnlxuICAgICAgLy8g5omA5Lul5q2k5aSE5Yqg5YWlIGNhbGxiYWNrIOS7pemYsuatoui/meenjeaDheWGtVxuICAgICAgYXBwLnVzZXJJbmZvUmVhZHlDYWxsYmFjayA9IHJlcyA9PiB7XG4gICAgICAgIHRoaXMuc2V0RGF0YSh7XG4gICAgICAgICAgdXNlckluZm86IHJlcy51c2VySW5mbyxcbiAgICAgICAgICBoYXNVc2VySW5mbzogdHJ1ZSxcbiAgICAgICAgfSlcbiAgICAgIH1cbiAgICB9IGVsc2Uge1xuICAgICAgLy8g5Zyo5rKh5pyJIG9wZW4tdHlwZT1nZXRVc2VySW5mbyDniYjmnKznmoTlhbzlrrnlpITnkIZcbiAgICAgIHd4LmdldFVzZXJJbmZvKHtcbiAgICAgICAgc3VjY2VzczogcmVzID0+IHtcbiAgICAgICAgICBhcHAuZ2xvYmFsRGF0YS51c2VySW5mbyA9IHJlcy51c2VySW5mb1xuICAgICAgICAgIHRoaXMuc2V0RGF0YSh7XG4gICAgICAgICAgICB1c2VySW5mbzogcmVzLnVzZXJJbmZvLFxuICAgICAgICAgICAgaGFzVXNlckluZm86IHRydWUsXG4gICAgICAgICAgfSlcbiAgICAgICAgfSxcbiAgICAgIH0pXG4gICAgfVxuICB9LFxuICBnZXRVc2VySW5mbyhlOiBhbnkpIHtcbiAgICBjb25zb2xlLmxvZyhlKVxuICAgIGFwcC5nbG9iYWxEYXRhLnVzZXJJbmZvID0gZS5kZXRhaWwudXNlckluZm9cbiAgICB0aGlzLnNldERhdGEoe1xuICAgICAgdXNlckluZm86IGUuZGV0YWlsLnVzZXJJbmZvLFxuICAgICAgaGFzVXNlckluZm86IHRydWUsXG4gICAgfSlcbiAgfSxcbn0pXG4iXX0=

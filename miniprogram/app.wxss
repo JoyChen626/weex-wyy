@@ -1,11 +1,12 @@
 /**app.wxss**/
 @import './weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+@import './utils/iconfont.wxss';
 .clear::after{
   display: block;
   content: "";
   clear: both;
 }
 page{
-  min-height: 100%;
+  height: 100%;
 }
 

@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatTime = function (date) {
+export const formatTime = function (date) {
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
     var day = date.getDate();
@@ -15,4 +13,99 @@ var formatNumber = function (n) {
     var s = n.toString();
     return s[1] ? s : '0' + s;
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXRpbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInV0aWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBYSxRQUFBLFVBQVUsR0FBRyxVQUFDLElBQVU7SUFDbkMsSUFBTSxJQUFJLEdBQUcsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFBO0lBQy9CLElBQU0sS0FBSyxHQUFHLElBQUksQ0FBQyxRQUFRLEVBQUUsR0FBRyxDQUFDLENBQUE7SUFDakMsSUFBTSxHQUFHLEdBQUcsSUFBSSxDQUFDLE9BQU8sRUFBRSxDQUFBO0lBQzFCLElBQU0sSUFBSSxHQUFHLElBQUksQ0FBQyxRQUFRLEVBQUUsQ0FBQTtJQUM1QixJQUFNLE1BQU0sR0FBRyxJQUFJLENBQUMsVUFBVSxFQUFFLENBQUE7SUFDaEMsSUFBTSxNQUFNLEdBQUcsSUFBSSxDQUFDLFVBQVUsRUFBRSxDQUFBO0lBRWhDLE9BQU8sQ0FDTCxDQUFDLElBQUksRUFBRSxLQUFLLEVBQUUsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLFlBQVksQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUM7UUFDOUMsR0FBRztRQUNILENBQUMsSUFBSSxFQUFFLE1BQU0sRUFBRSxNQUFNLENBQUMsQ0FBQyxHQUFHLENBQUMsWUFBWSxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUNuRCxDQUFBO0FBQ0gsQ0FBQyxDQUFBO0FBRUQsSUFBTSxZQUFZLEdBQUcsVUFBQyxDQUFTO0lBQzdCLElBQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQTtJQUN0QixPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLEdBQUcsQ0FBQyxDQUFBO0FBQzNCLENBQUMsQ0FBQSIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjb25zdCBmb3JtYXRUaW1lID0gKGRhdGU6IERhdGUpID0+IHtcbiAgY29uc3QgeWVhciA9IGRhdGUuZ2V0RnVsbFllYXIoKVxuICBjb25zdCBtb250aCA9IGRhdGUuZ2V0TW9udGgoKSArIDFcbiAgY29uc3QgZGF5ID0gZGF0ZS5nZXREYXRlKClcbiAgY29uc3QgaG91ciA9IGRhdGUuZ2V0SG91cnMoKVxuICBjb25zdCBtaW51dGUgPSBkYXRlLmdldE1pbnV0ZXMoKVxuICBjb25zdCBzZWNvbmQgPSBkYXRlLmdldFNlY29uZHMoKVxuXG4gIHJldHVybiAoXG4gICAgW3llYXIsIG1vbnRoLCBkYXldLm1hcChmb3JtYXROdW1iZXIpLmpvaW4oJy8nKSArXG4gICAgJyAnICtcbiAgICBbaG91ciwgbWludXRlLCBzZWNvbmRdLm1hcChmb3JtYXROdW1iZXIpLmpvaW4oJzonKVxuICApXG59XG5cbmNvbnN0IGZvcm1hdE51bWJlciA9IChuOiBudW1iZXIpID0+IHtcbiAgY29uc3QgcyA9IG4udG9TdHJpbmcoKVxuICByZXR1cm4gc1sxXSA/IHMgOiAnMCcgKyBzXG59XG4iXX0=
+
+var getDataByKey = function(value){
+    return value
+}
+
+//测试地址
+const ApiRootUrl = '';
+var contentType = 'application/json';
+var token = getDataByKey('token')? getDataByKey('token') : ''
+
+  /**
+   * 微信的request
+   */
+  function request(url, data = {}, method = "GET") {
+    return new Promise(function(resolve, reject) {
+      wx.request({
+        url: ApiRootUrl + url,
+        data: data,
+        method: method,
+        header: {
+          'Content-Type': contentType,
+          'Authorization': token
+        },
+        success: function(res) {
+          console.log('===============================================================================================')
+          console.log('==    接口地址：' + url)
+          console.log('==    接口参数：' + JSON.stringify(data))
+          console.log('==    请求类型：' + method)
+          console.log("==    接口状态：" + res.statusCode);
+          console.log('===============================================================================================')
+          if (res.statusCode == 200) {
+            //请求正常200
+            var daesData = null
+            try {
+              daesData = res.data;
+              if (daesData.status) {
+                //正常
+                resolve(daesData.data);
+              } else {
+                //错误
+                reject(daesData.message)
+              }
+            } catch (error) {
+              console.log('数据解码失败')
+              reject("数据解码失败")
+            }
+          } else if (res.statusCode == 401) {
+            //此处验证了token的登录失效，如果不需要，可以去掉。
+            //未登录，跳转登录界面
+            reject("登录已过期")
+            wx.showModal({
+              title: '提示',
+              content: '登录已过期，请立即登录，否则无法正常使用',
+              success(res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                //   wx.navigateTo({
+                //     url: '/pages/login/login?toPageUrl=401',
+                //   })
+                } else if (res.cancel) {
+                  console.log('用户点击取消')
+                }
+              }
+            })
+          } else {
+            //请求失败
+            reject("请求失败：" + res.statusCode)
+          }
+        },
+        fail: function(err) {
+          //服务器连接异常
+          console.log('===============================================================================================')
+          console.log('==    接口地址：' + url)
+          console.log('==    接口参数：' + JSON.stringify(data))
+          console.log('==    请求类型：' + method)
+          console.log("==    服务器连接异常")
+          console.log('===============================================================================================')
+          reject("服务器连接异常，请检查网络再试")
+        }
+      })
+    });
+  }
+
+  /**
+ * GET请求封装
+ */
+export const get = function(url, data = {}) {
+    return request(url, data, 'GET')
+  }
+  
+  /**
+   * POST请求封装
+   */
+  export const post = function(url, data = {}) {
+    return request(url, data, 'POST')
+  }
